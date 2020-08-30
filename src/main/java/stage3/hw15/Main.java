@@ -11,10 +11,10 @@ public class Main {
 
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
-                int top = 0;
-                int right = 0;
-                int bottom = 0;
-                int left = 0;
+                int top = matrix[i - 1 < 0 ? matrix.length - 1 : i - 1][j];
+                int right = matrix[i][j + 1 > matrix[i].length - 1 ? 0 : j + 1];
+                int bottom = matrix[i + 1 > matrix.length - 1 ? 0 : i + 1][j];
+                int left = matrix[i][j - 1 < 0 ? matrix[i].length - 1 : j - 1];
 
                 result[i][j] = top + right + bottom + left;
             }
