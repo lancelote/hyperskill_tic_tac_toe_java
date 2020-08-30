@@ -7,7 +7,20 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static int[][] sumNeighbors(int[][] matrix) {
-        return matrix;
+        int[][] result = new int[matrix.length][matrix[0].length];
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                int top = 0;
+                int right = 0;
+                int bottom = 0;
+                int left = 0;
+
+                result[i][j] = top + right + bottom + left;
+            }
+        }
+
+        return result;
     }
 
     public static void printMatrix(int[][] matrix) {
@@ -38,6 +51,8 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        printMatrix(sumNeighbors(readMatrix()));
+        int[][] matrix = readMatrix();
+        int[][] result = sumNeighbors(matrix);
+        printMatrix(result);
     }
 }
