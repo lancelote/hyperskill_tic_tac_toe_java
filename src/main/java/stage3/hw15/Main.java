@@ -19,7 +19,7 @@ public class Main {
             rawData.add(row);
         }
 
-        // Convert to a better data structure
+        // Convert to a faster data structure
         int[][] matrix = new int[rawData.size()][];
         matrix = rawData.toArray(matrix);
 
