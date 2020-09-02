@@ -3,6 +3,7 @@ package stage3.hw16;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Main {
     public static int[][] readMatrix() {
@@ -18,6 +19,18 @@ public class Main {
         }
 
         return matrix;
+    }
+
+    public static boolean checkRows(int[][] matrix) {
+        int[] expectedRow = IntStream.rangeClosed(1, matrix.length).toArray();
+
+        for (int[] row : matrix) {
+            int[] sortedRow = IntStream.of(row).sorted().toArray();
+            if (!Arrays.equals(expectedRow, sortedRow)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static void printMatrix(int[][] matrix) {
