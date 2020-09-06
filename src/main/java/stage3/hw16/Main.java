@@ -33,6 +33,25 @@ public class Main {
         return true;
     }
 
+    public static boolean checkCols(int[][] matrix) {
+        assert matrix.length == matrix[0].length;
+
+        int[] expectedCol = IntStream.rangeClosed(1, matrix.length).toArray();
+
+        for (int j = 0; j < matrix.length; j++) {
+            int[] col = new int[matrix.length];
+            for (int i = 0; i < matrix.length; i++) {
+                col[i] = matrix[i][j];
+            }
+            int[] sortedCol = IntStream.of(col).sorted().toArray();
+            if (!Arrays.equals(expectedCol, sortedCol)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public static void printMatrix(int[][] matrix) {
         for (int[] row : matrix) {
             String line = Arrays.stream(row).mapToObj(String::valueOf).collect(Collectors.joining(" "));
