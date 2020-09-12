@@ -52,6 +52,25 @@ public class Main {
         return true;
     }
 
+    public static boolean checkSquares(int[][] matrix) {
+        int squaresLineNum = (int) Math.sqrt(matrix.length);
+        for (int iSquare = 0; iSquare < squaresLineNum; iSquare++) {
+            for (int jSquare = 0; jSquare < squaresLineNum; jSquare++) {
+                int[] line = new int[matrix.length];
+                for (int i = 0; i < squaresLineNum; i++) {
+                    for (int j = 0; j < squaresLineNum; j++) {
+                        line[] = matrix[][];  // ToDo: figure out indexes
+                    }
+                }
+                int[] sortedLine = IntStream.of(line).sorted().toArray();
+                if (!Arrays.equals(line, sortedLine)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public static void printMatrix(int[][] matrix) {
         for (int[] row : matrix) {
             String line = Arrays.stream(row).mapToObj(String::valueOf).collect(Collectors.joining(" "));
@@ -61,6 +80,10 @@ public class Main {
 
     public static void main(String[] args) {
         int[][] matrix = readMatrix();
-        printMatrix(matrix);
+        if (checkRows(matrix) && checkCols(matrix) && checkSquares(matrix)) {
+            System.out.println("YES");
+        } else {
+            System.out.println("NO");
+        }
     }
 }
