@@ -53,17 +53,19 @@ public class Main {
     }
 
     public static boolean checkSquares(int[][] matrix) {
-        int squaresLineNum = (int) Math.sqrt(matrix.length);
-        for (int iSquare = 0; iSquare < squaresLineNum; iSquare++) {
-            for (int jSquare = 0; jSquare < squaresLineNum; jSquare++) {
+        int squaresNum = (int) Math.sqrt(matrix.length);
+        int[] expectedLine = IntStream.rangeClosed(1, matrix.length).toArray();
+
+        for (int iSquare = 0; iSquare < squaresNum; iSquare++) {
+            for (int jSquare = 0; jSquare < squaresNum; jSquare++) {
                 int[] line = new int[matrix.length];
-                for (int i = 0; i < squaresLineNum; i++) {
-                    for (int j = 0; j < squaresLineNum; j++) {
-                        line[] = matrix[][];  // ToDo: figure out indexes
+                for (int i = 0; i < squaresNum; i++) {
+                    for (int j = 0; j < squaresNum; j++) {
+                        line[squaresNum * i + j] = matrix[squaresNum * iSquare + i][squaresNum * jSquare + j];
                     }
                 }
                 int[] sortedLine = IntStream.of(line).sorted().toArray();
-                if (!Arrays.equals(line, sortedLine)) {
+                if (!Arrays.equals(expectedLine, sortedLine)) {
                     return false;
                 }
             }
@@ -71,6 +73,7 @@ public class Main {
         return true;
     }
 
+    @SuppressWarnings("unused")
     public static void printMatrix(int[][] matrix) {
         for (int[] row : matrix) {
             String line = Arrays.stream(row).mapToObj(String::valueOf).collect(Collectors.joining(" "));

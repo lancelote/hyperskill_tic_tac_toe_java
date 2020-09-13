@@ -21,6 +21,7 @@ public class MainTest {
         };
         assertTrue(Main.checkRows(matrix));
         assertTrue(Main.checkCols(matrix));
+        assertTrue(Main.checkSquares(matrix));
     }
 
     @Test
@@ -33,6 +34,7 @@ public class MainTest {
         };
         assertFalse(Main.checkRows(matrix));
         assertFalse(Main.checkCols(matrix));
+        assertFalse(Main.checkSquares(matrix));
     }
 
     @Test
@@ -40,5 +42,6 @@ public class MainTest {
         int[][] matrix = {{1}};
         assertTrue(Main.checkRows(matrix));
         assertTrue(Main.checkCols(matrix));
+        assertTrue(Main.checkSquares(matrix));
     }
 }
