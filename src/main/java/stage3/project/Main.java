@@ -1,8 +1,50 @@
 package stage3.project;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
+    public static boolean rowOf(String player, String[] gameState) {
+        String[] expectedRow = new String[] {player, player, player};
+        for (int i = 0; i < 3; i++) {
+            String[] row = Arrays.copyOfRange(gameState, i * 3, i * 3 + 3);
+            if (Arrays.equals(row, expectedRow)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean colOf(String player, String[] gameState) {
+        String[] expectedCol = new String[] {player, player, player};
+        for (int i = 0; i < 3; i++) {
+            String[] col = new String[3];
+            for (int j = 0; j < 3; j++) {
+                col[j] = gameState[i + 3 * j];
+            }
+            if (Arrays.equals(col, expectedCol)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean rowOfX(String[] gameState) {
+        return rowOf("X", gameState);
+    }
+
+    public static boolean colOfX(String[] gameState) {
+        return colOf("X", gameState);
+    }
+
+    public static boolean rowOfY(String[] gameState) {
+        return rowOf("Y", gameState);
+    }
+
+    public static boolean colOfY(String[] gameState) {
+        return colOf("Y", gameState);
+    }
+
     public static boolean isNotFinished(String[] gameState) {
         return true;
     }
