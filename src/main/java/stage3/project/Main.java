@@ -3,11 +3,19 @@ package stage3.project;
 import java.util.Arrays;
 import java.util.Scanner;
 
+// ToDo: add tests
 public class Main {
-    public static boolean rowOf(String player, String[] gameState) {
-        String[] expectedRow = new String[] {player, player, player};
+    public static String[][] getRows(String[] gameState) {
+        String[][] rows = new String[3][3];
         for (int i = 0; i < 3; i++) {
-            String[] row = Arrays.copyOfRange(gameState, i * 3, i * 3 + 3);
+            System.arraycopy(gameState, i * 3, rows[i], 0, 3);
+        }
+        return rows;
+    }
+
+    public static boolean isRowOf(String player, String[] gameState) {
+        String[] expectedRow = new String[] {player, player, player};
+        for (String[] row : getRows(gameState)) {
             if (Arrays.equals(row, expectedRow)) {
                 return true;
             }
@@ -15,6 +23,15 @@ public class Main {
         return false;
     }
 
+    public static boolean rowOfXs(String[] gameState) {
+        return isRowOf("X", gameState);
+    }
+
+    public static boolean rowOfOs(String[] gameState) {
+        return isRowOf("O", gameState);
+    }
+
+    // ToDo: reimplement using the same API as rows
     public static boolean colOf(String player, String[] gameState) {
         String[] expectedCol = new String[] {player, player, player};
         for (int i = 0; i < 3; i++) {
@@ -29,40 +46,33 @@ public class Main {
         return false;
     }
 
-    public static boolean rowOfX(String[] gameState) {
-        return rowOf("X", gameState);
-    }
-
-    public static boolean colOfX(String[] gameState) {
+    public static boolean colOfXs(String[] gameState) {
         return colOf("X", gameState);
     }
 
-    public static boolean rowOfY(String[] gameState) {
-        return rowOf("Y", gameState);
-    }
-
-    public static boolean colOfY(String[] gameState) {
-        return colOf("Y", gameState);
-    }
-
-    public static boolean isNotFinished(String[] gameState) {
-        return true;
-    }
-
-    public static boolean isDraw(String[] gameState) {
-        return true;
+    public static boolean colOfOs(String[] gameState) {
+        return colOf("O", gameState);
     }
 
     public static boolean isXWins(String[] gameState) {
-        return true;
+        return rowOfXs(gameState) || colOfXs(gameState);
     }
 
     public static boolean isOWins(String[] gameState) {
+        return rowOfOs(gameState) || colOfOs(gameState);
+    }
+
+    public static boolean isDraw(String[] gameState) {
+        // ToDo: finish using isXWins and isOWinds
         return true;
     }
 
+    public static boolean isNotFinished(String[] gameState) {
+        return !isXWins(gameState) && !isOWins(gameState) && !isDraw(gameState);
+    }
+
     public static boolean isImpossible(String[] gameState) {
-        return true;
+        return isXWins(gameState) && isOWins(gameState);
     }
 
     public static String[] readGameState() {
