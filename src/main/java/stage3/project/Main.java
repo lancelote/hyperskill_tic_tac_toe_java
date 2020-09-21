@@ -13,6 +13,7 @@ public class Main {
         return rows;
     }
 
+    // ToDo: refactor and extract the same code from isRowOf and isColOf
     public static boolean isRowOf(String player, String[] gameState) {
         String[] expectedRow = new String[] {player, player, player};
         for (String[] row : getRows(gameState)) {
@@ -23,22 +24,27 @@ public class Main {
         return false;
     }
 
-    public static boolean rowOfXs(String[] gameState) {
+    public static boolean isRowOfXs(String[] gameState) {
         return isRowOf("X", gameState);
     }
 
-    public static boolean rowOfOs(String[] gameState) {
+    public static boolean isRowOfOs(String[] gameState) {
         return isRowOf("O", gameState);
     }
 
-    // ToDo: reimplement using the same API as rows
-    public static boolean colOf(String player, String[] gameState) {
-        String[] expectedCol = new String[] {player, player, player};
+    public static String[][] getCols(String[] gameState) {
+        String[][] cols = new String[3][3];
         for (int i = 0; i < 3; i++) {
-            String[] col = new String[3];
             for (int j = 0; j < 3; j++) {
-                col[j] = gameState[i + 3 * j];
+                cols[i][j] = gameState[i + 3 * j];
             }
+        }
+        return cols;
+    }
+
+    public static boolean isColOf(String player, String[] gameState) {
+        String[] expectedCol = new String[] {player, player, player};
+        for (String[] col : getCols(gameState)) {
             if (Arrays.equals(col, expectedCol)) {
                 return true;
             }
@@ -46,20 +52,20 @@ public class Main {
         return false;
     }
 
-    public static boolean colOfXs(String[] gameState) {
-        return colOf("X", gameState);
+    public static boolean isColOfXs(String[] gameState) {
+        return isColOf("X", gameState);
     }
 
-    public static boolean colOfOs(String[] gameState) {
-        return colOf("O", gameState);
+    public static boolean isColOfOs(String[] gameState) {
+        return isColOf("O", gameState);
     }
 
     public static boolean isXWins(String[] gameState) {
-        return rowOfXs(gameState) || colOfXs(gameState);
+        return isRowOfXs(gameState) || isColOfXs(gameState);
     }
 
     public static boolean isOWins(String[] gameState) {
-        return rowOfOs(gameState) || colOfOs(gameState);
+        return isRowOfOs(gameState) || isColOfOs(gameState);
     }
 
     public static boolean isDraw(String[] gameState) {
