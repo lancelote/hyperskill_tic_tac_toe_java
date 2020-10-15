@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class MainTest {
     @Test
-    public void test_big_valid_matrix() {
+    public void testBigValidMatrix() {
         int[][] matrix = {
                 {5, 8, 9, 6, 7, 4, 2, 1, 3},
                 {7, 4, 3, 1, 8, 2, 9, 5, 6},
@@ -25,7 +25,7 @@ public class MainTest {
     }
 
     @Test
-    void test_small_invalid_matrix() {
+    void testSmallInvalidMatrix() {
         int[][] matrix = {
                 {1, 1, 2, 2},
                 {1, 1, 2, 2},
@@ -38,7 +38,7 @@ public class MainTest {
     }
 
     @Test
-    void test_tiny_valid_matrix() {
+    void testTinyValidMatrix() {
         int[][] matrix = {{1}};
         assertTrue(Main.checkRows(matrix));
         assertTrue(Main.checkCols(matrix));
