@@ -3,7 +3,6 @@ package stage3.project;
 import java.util.Arrays;
 import java.util.Scanner;
 
-// ToDo: add tests
 public class Main {
     public static String[][] getRows(String[] gameState) {
         String[][] rows = new String[3][3];
@@ -96,25 +95,28 @@ public class Main {
         System.out.println("---------");
     }
 
-    public static void printState(String[] gameState) {
+    public static String getStatus(String[] gameState) {
+        String status = "Unknown game state";
+
         if (isNotFinished(gameState)) {
-            System.out.println("Game not finished");
+            status = "Game not finished";
         } else if (isDraw(gameState)) {
-            System.out.println("Draw");
+            status = "Draw";
         } else if (isXWins(gameState)) {
-            System.out.println("X wins");
+            status = "X wins";
         } else if (isOWins(gameState)) {
-            System.out.println("O wins");
+            status = "O wins";
         } else if (isImpossible(gameState)) {
-            System.out.println("Impossible");
-        } else {
-            System.out.println("Unknown game state");
+            status = "Impossible";
         }
+
+        return status;
     }
 
     public static void main(String[] args) {
         String[] gameState = readGameState();
-        printBoard(gameState);
-        printState(gameState);
+        printBoard(gameState);  // ToDo: remove before submitting
+        String status = getStatus(gameState);
+        System.out.println(status);
     }
 }
