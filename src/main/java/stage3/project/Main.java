@@ -66,8 +66,7 @@ public class Main {
     }
 
     public static boolean isDraw(String[] gameState) {
-        // ToDo: finish using isXWins and isOWinds
-        return true;
+        return !isXWins(gameState) && !isOWins(gameState);
     }
 
     public static boolean isNotFinished(String[] gameState) {
