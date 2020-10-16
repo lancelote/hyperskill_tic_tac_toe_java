@@ -100,12 +100,12 @@ public class Main {
 
         if (isNotFinished(gameState)) {
             status = "Game not finished";
-        } else if (isDraw(gameState)) {
-            status = "Draw";
         } else if (isXWins(gameState)) {
             status = "X wins";
         } else if (isOWins(gameState)) {
             status = "O wins";
+        } else if (isDraw(gameState)) {
+            status = "Draw";
         } else if (isImpossible(gameState)) {
             status = "Impossible";
         }
