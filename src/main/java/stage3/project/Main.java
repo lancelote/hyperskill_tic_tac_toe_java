@@ -22,10 +22,14 @@ public class Main {
         return cols;
     }
 
-    public static boolean isLineOf(String player, String[][] lines) {
+    public static boolean isLineOf(String player, String[] line) {
         String[] expectedLine = new String[] {player, player, player};
+        return Arrays.equals(line, expectedLine);
+    }
+
+    public static boolean isLinesOf(String player, String[][] lines) {
         for (String[] line : lines) {
-            if (Arrays.equals(line, expectedLine)) {
+            if (isLineOf(player, line)) {
                 return true;
             }
         }
@@ -33,11 +37,11 @@ public class Main {
     }
 
     public static boolean isRowOf(String player, String[] gameState) {
-        return isLineOf(player, getRows(gameState));
+        return isLinesOf(player, getRows(gameState));
     }
 
     public static boolean isColOf(String player, String[] gameState) {
-        return isLineOf(player, getCols(gameState));
+        return isLinesOf(player, getCols(gameState));
     }
 
     public static boolean isRowOfXs(String[] gameState) {
@@ -56,12 +60,54 @@ public class Main {
         return isColOf("O", gameState);
     }
 
+    public static String[] getRightDiagonal(String[] gameState) {
+        // ToDo: implement
+        return new String[] {"X", "X", "X"};
+    }
+
+    public static String[] getLeftDiagonal(String[] gameState) {
+        // ToDo: implement
+        return new String[] {"X", "X", "X"};
+    }
+
+    public static boolean isRightDiagonalOf(String player, String[] rightDiagonal) {
+        return isLineOf(player, rightDiagonal);
+    }
+
+    public static boolean isLeftDiagonalOf(String player, String[] leftDiagonal) {
+        return isLineOf(player, leftDiagonal);
+    }
+
+    public static boolean isRightDiagonalOfXs(String[] gameState) {
+        return isRightDiagonalOf("X", getRightDiagonal(gameState));
+    }
+
+    public static boolean isRightDiagonalOfOs(String[] gameState) {
+        return isRightDiagonalOf("O", getLeftDiagonal(gameState));
+    }
+
+    public static boolean isLeftDiagonalOfXs(String[] gameState) {
+        return isLeftDiagonalOf("X", gameState);
+    }
+
+    public static boolean isLeftDiagonalOfOs(String[] gameState) {
+        return isLeftDiagonalOf("O", gameState);
+    }
+
+    public static boolean isDiagonalOfXs(String[] gameState) {
+        return isRightDiagonalOfXs(gameState) || isLeftDiagonalOfXs(gameState);
+    }
+
+    public static boolean isDiagonalOfOs(String[] gameState) {
+        return isRightDiagonalOfOs(gameState) || isLeftDiagonalOfOs(gameState);
+    }
+
     public static boolean isXWins(String[] gameState) {
-        return isRowOfXs(gameState) || isColOfXs(gameState);
+        return isRowOfXs(gameState) || isColOfXs(gameState) || isDiagonalOfXs(gameState);
     }
 
     public static boolean isOWins(String[] gameState) {
-        return isRowOfOs(gameState) || isColOfOs(gameState);
+        return isRowOfOs(gameState) || isColOfOs(gameState) || isDiagonalOfOs(gameState);
     }
 
     public static boolean isDraw(String[] gameState) {
