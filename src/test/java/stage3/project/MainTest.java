@@ -16,6 +16,12 @@ public class MainTest {
         String[] matrix = {"X", "O", "X", "O", "X", "O", "X", "X", "O"};
         assertEquals(Main.getStatus(matrix), "X wins");
     }
+
+    @Test
+    void testOWinsVertically() {
+        String[] matrix = {"X", "O", "O", "O", "X", "O", "X", "X", "O"};
+        assertEquals(Main.getStatus(matrix), "O wins");
+    }
 }
 
 // ToDo: add more tests
