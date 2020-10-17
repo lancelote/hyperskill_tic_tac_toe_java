@@ -116,6 +116,21 @@ public class Main {
         return !isXWins(gameState) && !isOWins(gameState);
     }
 
+    public static int count(String player, String[] gameState) {
+        int count = 0;
+        for (String move : gameState) {
+            if (move.equals(player)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static boolean wrongNumberOfMoves(String[] gameState) {
+        int movesDiff = count("X", gameState) - count("O", gameState) ;
+        return movesDiff < -1 || movesDiff > 1;
+    }
+
     public static boolean isDraw(String[] gameState) {
         return hasNoWinner(gameState) && !movesAvailable(gameState);
     }
@@ -125,7 +140,7 @@ public class Main {
     }
 
     public static boolean isImpossible(String[] gameState) {
-        return isXWins(gameState) && isOWins(gameState);
+        return isXWins(gameState) && isOWins(gameState) || wrongNumberOfMoves(gameState);
     }
 
     public static String[] readGameState() {
@@ -150,10 +165,10 @@ public class Main {
     public static String getStatus(String[] gameState) {
         String status = "Unknown game state";
 
-        if (isNotFinished(gameState)) {
-            status = "Game not finished";
-        } else if (isImpossible(gameState)) {
+        if (isImpossible(gameState)) {
             status = "Impossible";
+        } else if (isNotFinished(gameState)) {
+            status = "Game not finished";
         } else if (isXWins(gameState)) {
             status = "X wins";
         } else if (isOWins(gameState)) {
