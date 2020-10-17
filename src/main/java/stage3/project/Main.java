@@ -108,12 +108,20 @@ public class Main {
         return isRowOfOs(gameState) || isColOfOs(gameState) || isDiagonalOfOs(gameState);
     }
 
-    public static boolean isDraw(String[] gameState) {
+    public static boolean movesAvailable(String[] gameState) {
+        return Arrays.asList(gameState).contains("_");
+    }
+
+    public static boolean hasNoWinner(String[] gameState) {
         return !isXWins(gameState) && !isOWins(gameState);
     }
 
+    public static boolean isDraw(String[] gameState) {
+        return hasNoWinner(gameState) && !movesAvailable(gameState);
+    }
+
     public static boolean isNotFinished(String[] gameState) {
-        return !isXWins(gameState) && !isOWins(gameState) && !isDraw(gameState);
+        return hasNoWinner(gameState) && movesAvailable(gameState);
     }
 
     public static boolean isImpossible(String[] gameState) {
