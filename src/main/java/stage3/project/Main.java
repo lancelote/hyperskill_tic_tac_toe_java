@@ -61,29 +61,27 @@ public class Main {
     }
 
     public static String[] getRightDiagonal(String[] gameState) {
-        // ToDo: implement
-        return new String[] {"X", "X", "X"};
+        return new String[] {gameState[0], gameState[4], gameState[8]};
     }
 
     public static String[] getLeftDiagonal(String[] gameState) {
-        // ToDo: implement
-        return new String[] {"X", "X", "X"};
+        return new String[] {gameState[2], gameState[4], gameState[6]};
     }
 
-    public static boolean isRightDiagonalOf(String player, String[] rightDiagonal) {
-        return isLineOf(player, rightDiagonal);
+    public static boolean isRightDiagonalOf(String player, String[] gameState) {
+        return isLineOf(player, getRightDiagonal(gameState));
     }
 
-    public static boolean isLeftDiagonalOf(String player, String[] leftDiagonal) {
-        return isLineOf(player, leftDiagonal);
+    public static boolean isLeftDiagonalOf(String player, String[] gameState) {
+        return isLineOf(player, getLeftDiagonal(gameState));
     }
 
     public static boolean isRightDiagonalOfXs(String[] gameState) {
-        return isRightDiagonalOf("X", getRightDiagonal(gameState));
+        return isRightDiagonalOf("X", gameState);
     }
 
     public static boolean isRightDiagonalOfOs(String[] gameState) {
-        return isRightDiagonalOf("O", getLeftDiagonal(gameState));
+        return isRightDiagonalOf("O", gameState);
     }
 
     public static boolean isLeftDiagonalOfXs(String[] gameState) {
@@ -146,14 +144,14 @@ public class Main {
 
         if (isNotFinished(gameState)) {
             status = "Game not finished";
+        } else if (isImpossible(gameState)) {
+            status = "Impossible";
         } else if (isXWins(gameState)) {
             status = "X wins";
         } else if (isOWins(gameState)) {
             status = "O wins";
         } else if (isDraw(gameState)) {
             status = "Draw";
-        } else if (isImpossible(gameState)) {
-            status = "Impossible";
         }
 
         return status;
