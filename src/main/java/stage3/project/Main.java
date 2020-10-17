@@ -182,7 +182,7 @@ public class Main {
 
     public static void main(String[] args) {
         String[] gameState = readGameState();
-        printBoard(gameState);  // ToDo: remove before submitting
+        printBoard(gameState);
         String status = getStatus(gameState);
         System.out.println(status);
     }
