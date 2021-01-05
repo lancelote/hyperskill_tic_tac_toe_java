@@ -13,7 +13,7 @@ class Coordinates {
     public final int y;
 
     Coordinates(int x, int y) throws OutBoundsMoveException {
-        if (x < 1 || x > 3 || y < 1 || y > 3) {
+        if (x < 0 || x > 2 || y < 0 || y > 2) {
             throw new OutBoundsMoveException();
         }
         this.x = x;
@@ -212,7 +212,7 @@ public class Main {
             throw new OccupiedCoordinateException();
         }
 
-        // ToDo: implement
+        gameState[move.y * 3 + move.x] = "X";
     }
 
     public static void processUserMove(String[] gameState) {
@@ -222,10 +222,13 @@ public class Main {
             makeUserMove(move, gameState);
         } catch (OutBoundsMoveException e) {
             System.out.println("Coordinates should be from 1 to 3!");
+            processUserMove(gameState);
         } catch (OccupiedCoordinateException e) {
             System.out.println("This cell is occupied! Choose another one!");
+            processUserMove(gameState);
         } catch (InputMismatchException e) {
             System.out.println("You should enter numbers!");
+            processUserMove(gameState);
         }
     }
 
